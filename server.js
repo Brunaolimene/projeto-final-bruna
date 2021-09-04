@@ -12,4 +12,4 @@ app.use('/category',  categoryRouter )
 const clothingRouter = require('./src/routes/clothing.routes')
 app.use('/clothing', clothingRouter )
 
-app.listen(3333, () => console.log('Servidor rodando na porta 3333'))
+app.listen(process.env.PORT || 3333, () => console.log('Servidor rodando na porta 3333'))

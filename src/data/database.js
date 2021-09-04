@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
-const connect = () => {mongoose.connect('mongodb://localhost:27017/camelliabrasil', {
+const MONGO_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/cameliabrasil"
+
+const connect = () => {
+  mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
