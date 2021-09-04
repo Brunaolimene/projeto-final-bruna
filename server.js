@@ -4,8 +4,11 @@ const app = express()
 const cors = require('cors')
 const PORT = process.env.PORT || 3333
 
+
+
 const db = require('./src/data/database')
 db.connect()
+
 
 app.use(cors())
 app.use(express.json())
