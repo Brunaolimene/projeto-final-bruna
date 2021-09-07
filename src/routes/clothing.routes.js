@@ -6,16 +6,10 @@ const controller = require("../controllers/clothingController")
 router.get('/', controller.getAll) 
 
 //{GET} - listar roupa por categoria [ok]
-router.get('/:categoria', controller.getByCategory)
+router.get('/buscar/:categoria', controller.getByCategory)
 
 //{GET} - listar roupas por id
 router.get('/:id', controller.getById)
-
-//{GET} - listar todos os vestidos
-
-//{GET} - listar todas as calças
-
-//{GET} - listar todas as blusas
 
 //{POST} - criar uma nova roupa [ok]
 router.post('/', controller.createClothing)
