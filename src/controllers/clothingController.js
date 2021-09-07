@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const category = require('../models/category')
 const clothing = require('../models/clothing')
 const Clothing = require('../models/clothing')
+const jwt = require('jsonwebtoken')
 
 const secret = process.env.SECRET
 
