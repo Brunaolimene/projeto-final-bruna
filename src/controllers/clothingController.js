@@ -4,7 +4,7 @@ const clothing = require('../models/clothing')
 const Clothing = require('../models/clothing')
 const jwt = require('jsonwebtoken')
 
-const secret = process.env.SECRET
+const SECRET = process.env.SECRET
 
 //{GET} - listar todas as roupas [ok]
 const getAll = async (req, res) =>{
