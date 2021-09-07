@@ -7,7 +7,7 @@ const SECRET = process.env.SECRET
 
 //{GET} - listar todas as categorias [ok]
 const getAll = async (req, res) => {
-    const authHeader = req.get('autorization')
+    const authHeader = req.get('authorization')
     const token = authHeader.split(' ')[1]
     console.log(token)
 
