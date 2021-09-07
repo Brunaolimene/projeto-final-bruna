@@ -49,11 +49,10 @@ const getByCategory = async (req, res) =>{
 
 //{GET} - listar roupas por id [rever na aula]
 const getById = async (req, res) =>{
-    const clothing = await Clothing.find()
-    const requiredId = req.params.id
-    const filteredClothing = clothing.filter(clothing => clothing.id == requiredId)
-    res.status(200).send(filteredClothing)
-}
+        const clothing = await Clothing.findById(req.params.id)
+        res.status(200).json(clothing)
+    };
+   
 
 //{POST} - criar roupas [ok]
 const createClothing = async (req, res) =>{ 
