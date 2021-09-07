@@ -3,19 +3,47 @@ const category = require('../models/category')
 const clothing = require('../models/clothing')
 const Clothing = require('../models/clothing')
 
+const secret = process.env.SECRET
+
 //{GET} - listar todas as roupas [ok]
 const getAll = async (req, res) =>{
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
     const clothing = await Clothing.find()
     res.status(200).json(clothing)
+  })
 }
 //{GET} - listar roupa por categoria [ok]
 const getByCategory = async (req, res) =>{
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
     const { categoria } = req.params
     Clothing.find({categoria : categoria})
      .then((list)=> {
         if(!list.length > 0) return res.status(404).send({message: "Categoria não encontrada"})
         return res.status(200).send(list)
      }) 
+    })
 }
 
 //{GET} - listar roupas por id [rever na aula]
@@ -25,12 +53,21 @@ const getById = async (req, res) =>{
     const filteredClothing = clothing.filter(clothing => clothing.id == requiredId)
     res.status(200).send(filteredClothing)
 }
-//{GET} - listar todos os vestidos
-//{GET} - listar todas as blusas
-//{GET} - listar todas as calças
 
 //{POST} - criar roupas [ok]
 const createClothing = async (req, res) =>{ 
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
     const clothing = new Clothing({
         _id: new mongoose.Types.ObjectId(),
         nome: req.body.nome,
@@ -52,11 +89,23 @@ const createClothing = async (req, res) =>{
       } catch (err){
          res.status(400).json({ message: err.message})
       }
-    
+    }) 
 }
 
 //{PATCH} - atualizar uma informacao especifica em uma roupa
 const updateOne = async (req, res) =>{
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
     const clothing = await Clothing.findById(req.params.id)
     try{
    if (clothing == null){
@@ -85,10 +134,23 @@ const updateOne = async (req, res) =>{
 }catch (err){
     res.status(500).json({message: err.message})
 }
+  })
 }
 
 //{DELETE} - deletar uma roupa
 const deleteClothing = async (req, res) =>{
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
 
     const clothing = await Clothing.findById(req.params.id)
     if (clothing == null){
@@ -101,6 +163,7 @@ const deleteClothing = async (req, res) =>{
     }catch (err){
         res.status(500).json({message: err.message})
     }
+})
          
 }
 

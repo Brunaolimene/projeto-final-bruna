@@ -1,13 +1,30 @@
 const mongoose = require('mongoose')
 const Category = require('../models/category')
+const jwt = require('jsonwebtoken')
+
+const SECRET = process.env.SECRET
+
 
 //{GET} - listar todas as categorias [ok]
 const getAll = async (req, res) => {
-    const category = await Category.find()
-    res.json(category)
+    const authHeader = req.get('autorization')
+    const token = authHeader.split(' ')[1]
+    console.log(token)
+
+    if (!token){
+    return res.status(403).send({message: "Insira um token válido"})
+    }
+
+    jwt.verify(token, SECRET, async (err) =>{
+        if (err) {
+            res.status(403).send({message: 'Token inválido', err })
+        }
+        const category = await Category.find()
+        res.json(category)
+    })
 }
 
-//{GET} - listar categoria por id [ok]
+//{GET} - listar categoria por id [ok] - REVER
 const getById = async (req, res) =>{
     const category = await Category.find()
     const requiredId = req.params.id
@@ -18,11 +35,23 @@ const getById = async (req, res) =>{
 
  //{POST} - criar nova categoria [ok]
 const createCategory = async (req, res) => {
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
+
     const category = new Category({
     _id: new mongoose.Types.ObjectId(),
     nome: req.body.nome,
     criadoEm: req.body.criadoEm,
-
     })
 const existingCategory = await Category.findOne({nome: req.body.nome})
 if (existingCategory) {
@@ -34,11 +63,24 @@ try{
 } catch(err) {
   res.status(400).json({ message: err.message})
     }
+})
 }
+
 
 //{PATCH} - atualizar uma informacao especifica em uma categoria
 const updateOne = async (req, res) => {
-    
+     const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
     try{
     
     const category = await Category.findById(req.params.id)
@@ -55,10 +97,22 @@ const updateOne = async (req, res) => {
     }catch (err){
         res.status(500).json({message: err.message})
     }
-    }
-
+  })
+  }
 //{DELETE} - deletar uma categoria [ok]
 const deleteCategory = async (req, res) =>{
+    const authHeader = req.get('authorization')
+    const token = authHeader.split(' ')[1]
+  console.log(token)
+
+  if (!token) {
+    return res.status(403).send({message: "Insira um token válido"})
+  }
+
+  jwt.verify(token, SECRET, async (err) =>{
+      if (err) {
+          res.status(403).send({message: 'Token inválido', err})
+      }
 
     const category = await Category.findById(req.params.id)
     if (category == null){
@@ -70,6 +124,7 @@ try{
 }catch (err){
     res.status(500).json({message: err.message})
 }
+  })
 }
 
 

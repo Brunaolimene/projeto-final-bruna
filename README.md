@@ -1,82 +1,84 @@
+# {REPROGRAMA}
 
-Nome Projeto: 
+### PROJETO FINAL – BRUNA MENEZES DE OLIVEIRA
+ ---
 
-CamelliaBrasil
+ **LOJAS DE ROUPAS**
 
+````
+ Objetivo: API que futuramente poderá ser uma aplicação mobile, com a finalidade de simular a estrutura organizacional de microempreendedores no ramo de lojas de roupas, onde os mesmos poderão a partir do seu login:
  
-
-Tema:
-
-Aplicação de API que tem por objetivo simular a manipulação dos itens que a loja possui em estoque. Sendo possível adicionar, editar, excluir e ver todas as peças e categorias. 
-
-Rotas/EndPoints
-GET/clothes/
-Rota que retorna todos os itens da loja
-HTTP 200 OK
-
-GET/:id/
-Rota que retorna os detalhes sobre um item baseado no seu id.
-HTTP 200 OK
- 
-POST/newClothing
-/
-Rota que recebe um novo item, adiciona ele no estoque e retorna o item criado.
-HTTP 201 CREATED
- 
-PUT/:id/
-Rota que atualiza o valor do item e retorna atualizado..
-HTTP 200 OK
- 
-DELETE/:id/
-Rota que deleta um item baseado no id.
-HTTP 204 NO CONTENT
-
-
+* Cadastrar roupas para seu estoque (CREATE),
+* Ver todas as roupas (GET)
+* Ver roupas por categoria (GET)
+* Ver todas as categorias (GET)
+* Fazer uma alteração/atualização no item cadastrado (PATCH)
+* Deletar roupa ou categoria cadastrada (DELETE)
+````
 
 
 **Requisitos** 
 
- [n precisa] "/clothing/vestido" Deverá retornar todas as roupas da categoria vestido
-
- [n precisa] "/clothing/blusa" Deverá retornar todas as roupas da categoria blusa
-
- [n precisa] "/clothing/calca" Deverá retornar todas as roupas sa categoria calça
-
+```
  [x] "/:categoria" Deverá retornar todas as roupas de uma categoria específica
-
+```
+```
  [x] "/category" Deverá retornar todas as categorias cadastradas
-
+ ```
+```
  [x] "/clothing" Deverá retornar todas as roupas cadastradas
+```
 
+```
  [x] "/category" Deverá criar uma categoria
-
+```
+```
  [x] "/clothing" Deverá criar uma roupa
-
- [] "/clothing/[ID]" Deverá deletar roupa por id específico e retornar mensagem amigável
-
+```
+```
+ [x] "/clothing/[ID]" Deverá deletar roupa por id específico e retornar mensagem amigável
+```
+```
  [x] "/category/[ID]" Deverá deletar categoria por id específico e retornar mensagem amigável
-
- [] "/clothing/[ID]" Deverá alterar informação específica dentro de uma roupa por id específico e retornar a roupa alterada
-
+```
+```
+ [x] "/clothing/[ID]" Deverá alterar informação específica dentro de uma roupa por id específico e retornar a roupa alterada
+```
+```
  [x] "/category/[ID]" Deverá alterar informação específica dentro de uma categoria por id específico e retornar a categoria alterada
-
+```
+```
 [rever] "/clothing/[ID]" Deverá retornar a roupa por id específico
-
+```
+```
 [x] "/category/[ID]" Deverá retornar a categoria por id específico
-
+```
 **Regras de negócio**
- [x]Não deverá ser possível criar categoria com o mesmo nome.
- [x]Não deverá ser possível criar roupa com o mesmo nome.
- [] O tamanho da roupa deverá ser adicionado no título do item.
+```
+ [x] Não deverá ser possível criar categoria com o mesmo nome.
+ ```
+ ```
+ [x] Não deverá ser possível criar roupa com o mesmo nome.
+ ```
+ ```
+ [x] O tamanho da roupa deverá ser adicionado no título do item.
+```
 
  **Dados para Collection Categoria**
+
 - id: autogerado e obrigatório
 - nome: texto e obrigatório
 - criadoEm: data gerada automaticamente e obrigatório
+---
+
 
 **Dados para Collection Roupas**
+
 - id: autogerado e obrigatório
 - nome: texto e obrigatório
 - preço: texto e obrigatório
 - criadoEm: data gerada automaticamente e obrigatório
 - categoria: texto e obrigatório obrigatório
+
+
+![](data:image/jpeg;base64,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)
