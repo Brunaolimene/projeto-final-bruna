@@ -18,4 +18,8 @@ app.use('/category',  categoryRouter )
 const clothingRouter = require('./src/routes/clothing.routes')
 app.use('/clothing', clothingRouter )
 
+const usuariasRouter = require('./src/routes/usuarias.routes')
+app.use('/usuarias', usuariasRouter)
+
+
 app.listen(PORT, () => console.log('Servidor rodando na porta 8080'))
