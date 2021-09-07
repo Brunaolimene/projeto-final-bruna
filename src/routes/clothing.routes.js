@@ -18,7 +18,7 @@ router.post('/', controller.createClothing)
 router.patch('/:id', controller.updateOne)
 
 //{DELETE} - deletar uma categoria
-router.delete('/:id', controller.deleteClothing)
+router.delete('/buscar/:id', controller.deleteClothing)
 
 
 
